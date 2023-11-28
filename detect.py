@@ -3,6 +3,7 @@ import time
 from utils import iou
 from scipy import spatial
 from darkflow.net.build import TFNet
+import argparse
 
 options = {'model': 'cfg/tiny-yolo-voc-3c.cfg',
            'load': 3750,
@@ -100,13 +101,23 @@ def blood_cell_count(file_name):
     print('{0:.5}'.format(avg_time), 'ms')
 
     cv2.imwrite('output/' + file_name, image)
-    cv2.imshow('Total RBC: ' + str(rbc) + ', WBC: ' + str(wbc) + ', Platelets: ' + str(platelets), image)
-    print('Press "ESC" to close . . .')
-    if cv2.waitKey(0) & 0xff == 27:
-        cv2.destroyAllWindows()
+    #Crear un archivo de texto con la información de la imagen
+    file = open('output/' + file_name + '.txt', 'w')
+    file.write('Total RBC: ' + str(rbc) + ', WBC: ' + str(wbc) + ', Platelets: ' + str(platelets))
+    file.close()
+
+    # cv2.imshow('Total RBC: ' + str(rbc) + ', WBC: ' + str(wbc) + ', Platelets: ' + str(platelets), image)
+    # print('Press "ESC" to close . . .')
+    # if cv2.waitKey(0) & 0xff == 27:
+    #     cv2.destroyAllWindows()
+
+# Configuración de argparse para la entrada de argumentos
+parser = argparse.ArgumentParser(description='Blood Cell Detection and Counting')
+parser.add_argument('--image_file', type=str, help='File name of the image for detection and counting')
+args = parser.parse_args()
 
 
-image_name = 'image_001.jpg'
-blood_cell_count(image_name)
+blood_cell_count(args.image_file)
+
 
 print('All Done!')

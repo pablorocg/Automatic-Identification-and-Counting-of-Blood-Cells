@@ -1,0 +1,1 @@
+docker run --gpus "device=0" --memory 4g -it celldetector:latest
