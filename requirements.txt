@@ -1,5 +1,9 @@
 opencv-python-headless==4.5.5.64
-tensorflow-gpu==2.2.0 
 tf-slim==1.1.0 
 Cython==0.29.2
 argparse==1.4.0
+tensorflow-gpu==2.2.0
+scipy
+
+
+
