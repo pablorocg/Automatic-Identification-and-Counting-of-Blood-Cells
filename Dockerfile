@@ -11,9 +11,9 @@ FROM python:3.6
 
 
 # # Instalar dependencias del sistema para OpenCV
-RUN apt-get update \
-    && apt-get install -y libgl1-mesa-glx \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update \
+#     && apt-get install -y libgl1-mesa-glx \
+#     && rm -rf /var/lib/apt/lists/*
 
 # Establecer el directorio de trabajo
 WORKDIR /app
@@ -22,10 +22,11 @@ WORKDIR /app
 COPY . /app
 
 # Instalar TensorFlow-GPU y TF-slim
-RUN pip install opencv-python-headless==4.5.5.64
-RUN pip install tensorflow-gpu==2.2.0 
-RUN pip install tf-slim==1.1.0 
-RUN pip install Cython==0.29.2
+RUN pip install -r ./requirements.txt
+# RUN pip install opencv-python-headless==4.5.5.64
+# RUN pip install tensorflow-gpu==2.2.0 
+# RUN pip install tf-slim==1.1.0 
+# RUN pip install Cython==0.29.2
 
 # Instalar otras dependencias si son necesarias
 # Por ejemplo, si hay un archivo requirements.txt, puedes descomentar la siguiente línea
